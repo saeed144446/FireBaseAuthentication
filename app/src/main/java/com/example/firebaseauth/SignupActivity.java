@@ -58,11 +58,13 @@ public class SignupActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(email)){
             Toast.makeText(this, "Please Enter Email", Toast.LENGTH_SHORT).show();
+            emailTextView.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)){
             Toast.makeText(this, "Please Enter Password", Toast.LENGTH_SHORT).show();
+            passwordTextView.requestFocus();
             return;
 
         }
@@ -74,7 +76,7 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(SignupActivity.this, "Registraion is Complete", Toast.LENGTH_SHORT).show();
 
                     progressbar.setVisibility(View.GONE);
-                    Intent intent=new Intent(SignupActivity.this, MainActivity.class);
+                    Intent intent=new Intent(SignupActivity.this, LoginActivity.class);
                     startActivity(intent);
 
                 } else {
