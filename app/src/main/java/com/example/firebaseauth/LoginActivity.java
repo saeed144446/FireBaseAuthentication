@@ -68,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
     private void loginUser() {
 
         progressbar.setVisibility(View.VISIBLE);
-
         String email, password;
         email = emailTextView.getText().toString();
         password = passwordTextView.getText().toString();
