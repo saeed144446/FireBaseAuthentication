@@ -19,19 +19,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
 import com.example.firebaseauth.databinding.ActivityMainBinding;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -55,33 +45,24 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-
     private TextView text,text1;
     private Button UploadImage;
     private    ProgressDialog dialog;
     private Uri uri;
-
     private EditText edtPhone, edtOTP;
     private Button verifyOTPBtn, generateOTPBtn;
-
     private String verificationId;
-
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
         mAuth=FirebaseAuth.getInstance();
-
-
         text=findViewById(R.id.text);
         text1=findViewById(R.id.text1);
         UploadImage=findViewById(R.id.uploadimage);
-
         edtPhone = findViewById(R.id.idEdtPhoneNumber);
         edtOTP = findViewById(R.id.idEdtOtp);
         verifyOTPBtn = findViewById(R.id.idBtnVerify);
@@ -101,38 +82,29 @@ public class MainActivity extends AppCompatActivity {
               startActivityForResult(intent,5);
 
            dialog=new ProgressDialog(MainActivity.this);
-
-
             }
         });
-
-
 
 
         generateOTPBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // below line is for checking whether the user
-                // has entered his mobile number or not.
+
                 if (TextUtils.isEmpty(edtPhone.getText().toString())) {
-                    // when mobile number text field is empty
-                    // displaying a toast message.
+
                     Toast.makeText(MainActivity.this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
                 } else {
-                    // if the text field is not empty we are calling our 
-                    // send OTP method for getting OTP from Firebase.
                     String phone = "+92" + edtPhone.getText().toString();
                     sendVerificationCode(phone);
                 }
             }
         });
 
-        // initializing on click listener
-        // for verify otp button
+
         verifyOTPBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // validating if the OTP text field is empty or not.
+
                 if (TextUtils.isEmpty(edtOTP.getText().toString())) {
                     // if the OTP text field is empty display 
                     // a message to user to enter OTP
@@ -228,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
             super.onCodeSent(s, forceResendingToken);
             // when we receive the OTP it
             // contains a unique id which
-            // we are storing in our string
+            // we are storing in our strig
             // which we have already created.
             verificationId = s;
         }
@@ -274,14 +246,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 5 && resultCode==RESULT_OK){
              uri= data.getData();
-            dialog.setTitle("UpLoading.....");
+            dialog.setTitle("uploading...");
             dialog.show();
             uploadImage();
         }
